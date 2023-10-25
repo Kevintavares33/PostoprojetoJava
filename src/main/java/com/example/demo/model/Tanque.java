@@ -38,4 +38,8 @@ public class Tanque {
     public void setCapacidadeLitros(double capacidadeLitros) {
         this.capacidadeLitros = capacidadeLitros;
     }
+
+    public String getNome() {
+        return null;
+    }
 }

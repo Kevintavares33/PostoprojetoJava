@@ -1,3 +1,5 @@
+package com.example.demo.model;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -14,22 +16,18 @@ public class Abastecimento {
     private double totalPago;
     private double imposto;
 
-    public Abastecimento() {
-    }
-
-    public Abastecimento(String nomePosto, double valorLitro, double quantidadeLitros, double totalPago) {
+    public Abastecimento(String nomePosto, double valorLitro, double quantidadeLitros) {
         this.nomePosto = nomePosto;
         this.valorLitro = valorLitro;
         this.quantidadeLitros = quantidadeLitros;
-        this.totalPago = totalPago;
+        this.calcularImposto();
+        this.totalPago = (this.valorLitro * this.quantidadeLitros) + this.imposto;
     }
 
     // getters e setters
 
-    public double calcularImposto() {
-        double valorAbastecido = this.valorLitro * this.quantidadeLitros;
-        this.imposto = valorAbastecido * 0.13; // 13% de imposto
-        return this.imposto;
+    private void calcularImposto() {
+        this.imposto = (this.valorLitro * this.quantidadeLitros) * 0.13; // 13% de imposto
     }
 
     @Override
@@ -42,5 +40,25 @@ public class Abastecimento {
                 ", totalPago=" + totalPago +
                 ", imposto=" + imposto +
                 '}';
+    }
+
+    public String getCombustivel() {
+        return null;
+    }
+
+    public double getTotalPago() {
+        return 0;
+    }
+
+    public Tanque getTanque() {
+        return null;
+    }
+
+    public Object getBomba() {
+        return null;
+    }
+
+    public Object getDataAbastecimento() {
+        return null;
     }
 }

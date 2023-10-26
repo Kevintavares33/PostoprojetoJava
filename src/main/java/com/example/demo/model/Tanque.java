@@ -11,35 +11,19 @@ public class Tanque {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String tipoCombustivel; // Tipo de combustível armazenado no tanque (gasolina, diesel, etc.)
-    private double capacidadeLitros; // Capacidade total do tanque em litros
+    private String tipoCombustivel;
+    private double capacidadeLitros;
+    private String nome; // Adicione uma propriedade para armazenar o nome do tanque
 
     // Getters e Setters
-    public Long getId() {
-        return id;
-    }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getTipoCombustivel() {
-        return tipoCombustivel;
-    }
-
-    public void setTipoCombustivel(String tipoCombustivel) {
-        this.tipoCombustivel = tipoCombustivel;
-    }
-
-    public double getCapacidadeLitros() {
-        return capacidadeLitros;
-    }
-
-    public void setCapacidadeLitros(double capacidadeLitros) {
-        this.capacidadeLitros = capacidadeLitros;
-    }
+    // ...
 
     public String getNome() {
-        return null;
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
     }
 }

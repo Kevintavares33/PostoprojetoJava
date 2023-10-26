@@ -26,7 +26,7 @@ public class ControledeAbastecimentoApplication {
 	private static final Logger logger = LoggerFactory.getLogger(ControledeAbastecimentoApplication.class);
 
 	@Autowired
-	private AbastecimentoService abastecimentoService;
+	private AbastecimentoService AbastecimentoService;
 
 	public static void main(String[] args) {
 		SpringApplication.run(ControledeAbastecimentoApplication.class, args);

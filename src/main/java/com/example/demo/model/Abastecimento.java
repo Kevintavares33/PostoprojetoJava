@@ -1,64 +1,121 @@
 package com.example.demo.model;
 
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 
 @Entity
 public class Abastecimento {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-    private String nomePosto;
-    private double valorLitro;
+    private int numero;
+    private String data;
+
+    @OneToOne
+    private Tanque tanque;
+
+    @OneToOne
+    private Bomba bomba;
+
+    private String combustivel;
     private double quantidadeLitros;
+    private double valorLitro;
     private double totalPago;
     private double imposto;
 
-    public Abastecimento(String nomePosto, double valorLitro, double quantidadeLitros) {
-        this.nomePosto = nomePosto;
-        this.valorLitro = valorLitro;
+    public Abastecimento() {
+        // Construtor vazio necessário para o JPA
+    }
+
+    public Abastecimento(String data, int numero, Tanque tanque, Bomba bomba, String combustivel,
+            double quantidadeLitros, double valorLitro, double totalPago, double imposto) {
+        this.data = data;
+        this.numero = numero;
+        this.tanque = tanque;
+        this.bomba = bomba;
+        this.combustivel = combustivel;
         this.quantidadeLitros = quantidadeLitros;
-        this.calcularImposto();
-        this.totalPago = (this.valorLitro * this.quantidadeLitros) + this.imposto;
+        this.valorLitro = valorLitro;
+        this.totalPago = totalPago;
+        this.imposto = imposto;
     }
 
-    // getters e setters
+    // Getters e setters
 
-    private void calcularImposto() {
-        this.imposto = (this.valorLitro * this.quantidadeLitros) * 0.13; // 13% de imposto
+    public int getNumero() {
+        return numero;
     }
 
-    @Override
-    public String toString() {
-        return "Abastecimento{" +
-                "id=" + id +
-                ", nomePosto='" + nomePosto + '\'' +
-                ", valorLitro=" + valorLitro +
-                ", quantidadeLitros=" + quantidadeLitros +
-                ", totalPago=" + totalPago +
-                ", imposto=" + imposto +
-                '}';
+    public void setNumero(int numero) {
+        this.numero = numero;
     }
 
-    public String getCombustivel() {
-        return null;
+    public String getData() {
+        return data;
     }
 
-    public double getTotalPago() {
-        return 0;
+    public void setData(String data) {
+        this.data = data;
     }
 
     public Tanque getTanque() {
-        return null;
+        return tanque;
     }
 
-    public Object getBomba() {
-        return null;
+    public void setTanque(Tanque tanque) {
+        this.tanque = tanque;
     }
 
-    public Object getDataAbastecimento() {
-        return null;
+    public Bomba getBomba() {
+        return bomba;
+    }
+
+    public void setBomba(Bomba bomba) {
+        this.bomba = bomba;
+    }
+
+    public String getCombustivel() {
+        return combustivel;
+    }
+
+    public void setCombustivel(String combustivel) {
+        this.combustivel = combustivel;
+    }
+
+    public double getQuantidadeLitros() {
+        return quantidadeLitros;
+    }
+
+    public void setQuantidadeLitros(double quantidadeLitros) {
+        this.quantidadeLitros = quantidadeLitros;
+    }
+
+    public double getValorLitro() {
+        return valorLitro;
+    }
+
+    public void setValorLitro(double valorLitro) {
+        this.valorLitro = valorLitro;
+    }
+
+    public double getTotalPago() {
+        return totalPago;
+    }
+
+    public void setTotalPago(double totalPago) {
+        this.totalPago = totalPago;
+    }
+
+    public double getImposto() {
+        return imposto;
+    }
+
+    public void setImposto(double imposto) {
+        this.imposto = imposto;
+    }
+
+    public void calcularImposto() {
+    }
+
+    public void calcularTotalPago() {
     }
 }

@@ -11,10 +11,11 @@ public class Bomba {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private int numero; // Número de identificação da bomba
-    private String tipoCombustivel; // Tipo de combustível que a bomba pode abastecer (gasolina, diesel, etc.)
+    private int numero;
+    private String tipoCombustivel;
 
     // Getters e Setters
+
     public Long getId() {
         return id;
     }

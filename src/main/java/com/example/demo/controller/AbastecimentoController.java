@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/abastecimentos")
+@RequestMapping("/abastecimentos")
 public class AbastecimentoController {
 
     private final AbastecimentoService abastecimentoService;
@@ -19,45 +19,27 @@ public class AbastecimentoController {
     }
 
     @GetMapping
-    public ResponseEntity<List<Abastecimento>> getAllAbastecimentos() {
-        List<Abastecimento> abastecimentos = abastecimentoService.getAllAbastecimentos();
-        return new ResponseEntity<>(abastecimentos, HttpStatus.OK);
+    public List<Abastecimento> getAllAbastecimentos() {
+        return abastecimentoService.getAllAbastecimentos();
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Abastecimento> getAbastecimentoById(@PathVariable Long id) {
-        Abastecimento abastecimento = abastecimentoService.getAbastecimentoById(id);
-        if (abastecimento != null) {
-            return new ResponseEntity<>(abastecimento, HttpStatus.OK);
-        } else {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
+    public Abastecimento getAbastecimentoById(@PathVariable Long id) {
+        return abastecimentoService.getAbastecimentoById(id);
     }
 
     @PostMapping
-    public ResponseEntity<Abastecimento> createAbastecimento(@RequestBody Abastecimento abastecimento) {
-        Abastecimento createdAbastecimento = abastecimentoService.createAbastecimento(abastecimento);
-        return new ResponseEntity<>(createdAbastecimento, HttpStatus.CREATED);
+    public Abastecimento createAbastecimento(@RequestBody Abastecimento abastecimento) {
+        return abastecimentoService.createAbastecimento(abastecimento);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Abastecimento> updateAbastecimento(@PathVariable Long id,
-            @RequestBody Abastecimento abastecimento) {
-        Abastecimento updatedAbastecimento = abastecimentoService.updateAbastecimento(id, abastecimento);
-        if (updatedAbastecimento != null) {
-            return new ResponseEntity<>(updatedAbastecimento, HttpStatus.OK);
-        } else {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
+    public Abastecimento updateAbastecimento(@PathVariable Long id, @RequestBody Abastecimento abastecimento) {
+        return abastecimentoService.updateAbastecimento(id, abastecimento);
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteAbastecimento(@PathVariable Long id) {
-        boolean deleted = abastecimentoService.deleteAbastecimento(id);
-        if (deleted) {
-            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-        } else {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
+    public void deleteAbastecimento(@PathVariable Long id) {
+        abastecimentoService.deleteAbastecimento(id);
     }
 }

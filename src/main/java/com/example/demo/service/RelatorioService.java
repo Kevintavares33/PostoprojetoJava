@@ -1,43 +1,32 @@
 package com.example.demo.service;
 
-import org.springframework.stereotype.Service;
-import com.example.demo.DTO.RelatorioAbastecimentoDTO;
-import com.example.demo.repository.AbastecimentoRepository;
 import com.example.demo.model.Abastecimento;
+import com.example.demo.model.Bomba;
 import com.example.demo.model.Tanque;
-
-import java.util.List;
-import java.util.stream.Collectors;
+import org.springframework.stereotype.Service;
 
 @Service
 public class RelatorioService {
 
-    private final AbastecimentoRepository abastecimentoRepository;
+    public String gerarRelatorio(Abastecimento abastecimento) {
+        StringBuilder relatorio = new StringBuilder();
 
-    public RelatorioService(AbastecimentoRepository abastecimentoRepository) {
-        this.abastecimentoRepository = abastecimentoRepository;
-    }
+        relatorio.append("Relatório de Abastecimento\n");
+        relatorio.append("Data: ").append(abastecimento.getData()).append("\n");
+        relatorio.append("Número do Abastecimento: ").append(abastecimento.getNumero()).append("\n");
 
-    public List<RelatorioAbastecimentoDTO> gerarRelatorioAbastecimentos() {
-        List<Abastecimento> abastecimentos = abastecimentoRepository.findAll();
-
-        return abastecimentos.stream()
-                .map(this::mapToRelatorioAbastecimentoDTO)
-                .collect(Collectors.toList());
-    }
-
-    private RelatorioAbastecimentoDTO mapToRelatorioAbastecimentoDTO(Abastecimento abastecimento) {
-        String dia = abastecimento.getDataAbastecimento().toString(); // Supondo que a data esteja disponível no objeto
-                                                                      // Abastecimento
         Tanque tanque = abastecimento.getTanque();
-        String nomeTanque = tanque.getNome();
-        String bomba = String.valueOf(((Object) abastecimento.getBomba()).getNumero()); // Supondo que o número da bomba
-                                                                                        // seja um
-        // inteiro
-        String combustivel = abastecimento.getCombustivel(); // Supondo que o tipo de combustível seja uma string
-        double valor = abastecimento.getTotalPago(); // Supondo que o valor total pago esteja disponível no objeto
-                                                     // Abastecimento
+        relatorio.append("Tanque: ").append(tanque.getNome()).append("\n");
 
-        return new RelatorioAbastecimentoDTO(dia, nomeTanque, bomba, combustivel, valor);
+        Bomba bomba = abastecimento.getBomba();
+        relatorio.append("Bomba: ").append(bomba.getNumero()).append("\n");
+
+        relatorio.append("Combustível: ").append(abastecimento.getCombustivel()).append("\n");
+        relatorio.append("Quantidade de Litros: ").append(abastecimento.getQuantidadeLitros()).append("\n");
+        relatorio.append("Valor por Litro: ").append(abastecimento.getValorLitro()).append("\n");
+        relatorio.append("Total Pago: ").append(abastecimento.getTotalPago()).append("\n");
+        relatorio.append("Imposto: ").append(abastecimento.getImposto()).append("\n");
+
+        return relatorio.toString();
     }
 }

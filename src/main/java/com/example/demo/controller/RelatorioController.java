@@ -25,12 +25,9 @@ public class RelatorioController {
 
     @GetMapping("/gerarRelatorio")
     public void gerarRelatorioAbastecimentos() {
-        // Aqui você pode chamar o serviço de abastecimento para obter os dados
-        // necessários
-        // e passá-los para o serviço de relatório
-        Abastecimento abastecimento = new Abastecimento("Posto A", 0, null, null, null, 4.5, 50, 0, 0); // Exemplo de
-                                                                                                        // dados de
-                                                                                                        // abastecimento
+
+        Abastecimento abastecimento = new Abastecimento("Posto A", 0, null, null, null, 4.5, 50, 0, 0);
+
         relatorioService.gerarRelatorio(abastecimento);
     }
 }

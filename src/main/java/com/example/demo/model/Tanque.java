@@ -13,11 +13,7 @@ public class Tanque {
 
     private String tipoCombustivel;
     private double capacidadeLitros;
-    private String nome; // Adicione uma propriedade para armazenar o nome do tanque
-
-    // Getters e Setters
-
-    // ...
+    private String nome;
 
     public String getNome() {
         return nome;

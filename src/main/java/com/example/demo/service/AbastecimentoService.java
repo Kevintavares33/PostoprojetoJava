@@ -1,30 +1,41 @@
 package com.example.demo.service;
 
+import java.util.List;
+import java.util.Objects;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import com.example.demo.model.Abastecimento;
 import com.example.demo.repository.AbastecimentoRepository;
-
-import java.util.List;
-
-import org.springframework.stereotype.Service;
 
 @Service
 public class AbastecimentoService {
 
     private final AbastecimentoRepository abastecimentoRepository;
 
+    @Autowired
     public AbastecimentoService(AbastecimentoRepository abastecimentoRepository) {
         this.abastecimentoRepository = abastecimentoRepository;
     }
 
     public Abastecimento createAbastecimento(Abastecimento abastecimento) {
+        validateAbastecimento(abastecimento);
         abastecimento.calcularImposto();
         abastecimento.calcularTotalPago();
         return abastecimentoRepository.save(abastecimento);
     }
 
     public Abastecimento updateAbastecimento(Long id, Abastecimento abastecimento) {
+        validateAbastecimento(abastecimento);
+
         Abastecimento existingAbastecimento = abastecimentoRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Abastecimento não encontrado"));
+                .orElse(null);
+
+        if (existingAbastecimento == null) {
+
+            return null;
+        }
 
         existingAbastecimento.setValorLitro(abastecimento.getValorLitro());
         existingAbastecimento.setQuantidadeLitros(abastecimento.getQuantidadeLitros());
@@ -38,14 +49,17 @@ public class AbastecimentoService {
         abastecimentoRepository.deleteById(id);
     }
 
-    public void salvarAbastecimento(Abastecimento abastecimento) {
-    }
-
     public List<Abastecimento> getAllAbastecimentos() {
-        return null;
+        return abastecimentoRepository.findAll();
     }
 
     public Abastecimento getAbastecimentoById(Long id) {
-        return null;
+        return abastecimentoRepository.findById(id)
+                .orElse(null);
+    }
+
+    private void validateAbastecimento(Abastecimento abastecimento) {
+        Objects.requireNonNull(abastecimento, "O objeto de abastecimento não pode ser nulo");
+        // Adicione outras validações conforme necessário
     }
 }

@@ -14,8 +14,6 @@ public class Bomba {
     private int numero;
     private String tipoCombustivel;
 
-    // Getters e Setters
-
     public Long getId() {
         return id;
     }

@@ -23,7 +23,7 @@ public class Abastecimento {
     private double imposto;
 
     public Abastecimento() {
-        // Construtor vazio necessário para o JPA
+
     }
 
     public Abastecimento(String data, int numero, Tanque tanque, Bomba bomba, String combustivel,

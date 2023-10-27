@@ -72,7 +72,6 @@
             <scope>runtime</scope>
         </dependency>
 
-        <!-- Dependências de Teste -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
@@ -87,7 +86,7 @@
 
     <build>
         <plugins>
-            <!-- Plugin do Spring Boot para empacotar o aplicativo -->
+           
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>

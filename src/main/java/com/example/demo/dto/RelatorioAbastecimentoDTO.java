@@ -1,16 +1,16 @@
-package com.example.demo.DTO;
+package com.example.demo.dto;
 
-public class RelatorioAbastecimentoDTO {
+public class RelatorioAbastecimentodto {
     private String dia;
     private String tanque;
     private String bomba;
     private String combustivel;
     private double valor;
 
-    public RelatorioAbastecimentoDTO() {
+    public RelatorioAbastecimentodto() {
     }
 
-    public RelatorioAbastecimentoDTO(String dia, String tanque, String bomba, String combustivel, double valor) {
+    public RelatorioAbastecimentodto(String dia, String tanque, String bomba, String combustivel, double valor) {
         this.dia = dia;
         this.tanque = tanque;
         this.bomba = bomba;

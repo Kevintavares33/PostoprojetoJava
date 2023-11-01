@@ -1,13 +1,18 @@
 package com.example.demo.model;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
 
 @Entity
 public class Abastecimento {
     @Id
-    private int numero;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    private String posto;
     private String data;
 
     @OneToOne
@@ -23,30 +28,35 @@ public class Abastecimento {
     private double imposto;
 
     public Abastecimento() {
-
     }
 
-    public Abastecimento(String data, int numero, Tanque tanque, Bomba bomba, String combustivel,
-            double quantidadeLitros, double valorLitro, double totalPago, double imposto) {
+    public Abastecimento(String posto, String data, Tanque tanque, Bomba bomba, String combustivel,
+            double quantidadeLitros, double valorLitro) {
+        this.posto = posto;
         this.data = data;
-        this.numero = numero;
         this.tanque = tanque;
         this.bomba = bomba;
         this.combustivel = combustivel;
         this.quantidadeLitros = quantidadeLitros;
         this.valorLitro = valorLitro;
-        this.totalPago = totalPago;
-        this.imposto = imposto;
+        calcularImposto();
+        calcularTotalPago();
     }
 
-    // Getters e setters
-
-    public int getNumero() {
-        return numero;
+    public Long getId() {
+        return id;
     }
 
-    public void setNumero(int numero) {
-        this.numero = numero;
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getPosto() {
+        return posto;
+    }
+
+    public void setPosto(String posto) {
+        this.posto = posto;
     }
 
     public String getData() {
@@ -87,6 +97,8 @@ public class Abastecimento {
 
     public void setQuantidadeLitros(double quantidadeLitros) {
         this.quantidadeLitros = quantidadeLitros;
+        calcularImposto();
+        calcularTotalPago();
     }
 
     public double getValorLitro() {
@@ -95,27 +107,33 @@ public class Abastecimento {
 
     public void setValorLitro(double valorLitro) {
         this.valorLitro = valorLitro;
+        calcularImposto();
+        calcularTotalPago();
     }
 
     public double getTotalPago() {
         return totalPago;
     }
 
-    public void setTotalPago(double totalPago) {
-        this.totalPago = totalPago;
-    }
-
     public double getImposto() {
         return imposto;
+    }
+
+    private void calcularImposto() {
+        this.imposto = this.quantidadeLitros * this.valorLitro * 0.13; // Imposto de 13%
+    }
+
+    private void calcularTotalPago() {
+        this.totalPago = this.quantidadeLitros * this.valorLitro + this.imposto;
+
     }
 
     public void setImposto(double imposto) {
         this.imposto = imposto;
     }
 
-    public void calcularImposto() {
+    public void setTotalPago(double totalPago) {
+        this.totalPago = totalPago;
     }
 
-    public void calcularTotalPago() {
-    }
 }

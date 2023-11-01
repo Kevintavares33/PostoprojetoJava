@@ -21,8 +21,7 @@ public class AbastecimentoService {
 
     public Abastecimento createAbastecimento(Abastecimento abastecimento) {
         validateAbastecimento(abastecimento);
-        abastecimento.calcularImposto();
-        abastecimento.calcularTotalPago();
+        calcularImpostoETotalPago(abastecimento);
         return abastecimentoRepository.save(abastecimento);
     }
 
@@ -33,14 +32,12 @@ public class AbastecimentoService {
                 .orElse(null);
 
         if (existingAbastecimento == null) {
-
             return null;
         }
 
         existingAbastecimento.setValorLitro(abastecimento.getValorLitro());
         existingAbastecimento.setQuantidadeLitros(abastecimento.getQuantidadeLitros());
-        existingAbastecimento.calcularImposto();
-        existingAbastecimento.calcularTotalPago();
+        calcularImpostoETotalPago(existingAbastecimento);
 
         return abastecimentoRepository.save(existingAbastecimento);
     }
@@ -54,12 +51,20 @@ public class AbastecimentoService {
     }
 
     public Abastecimento getAbastecimentoById(Long id) {
-        return abastecimentoRepository.findById(id)
-                .orElse(null);
+        return abastecimentoRepository.findById(id).orElse(null);
     }
 
     private void validateAbastecimento(Abastecimento abastecimento) {
         Objects.requireNonNull(abastecimento, "O objeto de abastecimento não pode ser nulo");
         // Adicione outras validações conforme necessário
+    }
+
+    private void calcularImpostoETotalPago(Abastecimento abastecimento) {
+        double valorAbastecido = abastecimento.getQuantidadeLitros() * abastecimento.getValorLitro();
+        double imposto = valorAbastecido * 0.13; // Imposto de 13%
+        double totalPago = valorAbastecido + imposto;
+
+        abastecimento.setImposto(imposto);
+        abastecimento.setTotalPago(totalPago);
     }
 }

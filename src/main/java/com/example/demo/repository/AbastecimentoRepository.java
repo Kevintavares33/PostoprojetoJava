@@ -6,5 +6,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface AbastecimentoRepository extends JpaRepository<Abastecimento, Long> {
-    // Métodos de consulta personalizados, se necessário
+
 }

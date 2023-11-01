@@ -1,32 +1,38 @@
 package com.example.demo.service;
 
+import java.util.List;
+import java.util.ArrayList;
+import com.example.demo.dto.RelatorioAbastecimentodto;
 import com.example.demo.model.Abastecimento;
-import com.example.demo.model.Bomba;
-import com.example.demo.model.Tanque;
+import com.example.demo.repository.AbastecimentoRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
 public class RelatorioService {
+    private final AbastecimentoRepository abastecimentoRepository;
 
-    public String gerarRelatorio(Abastecimento abastecimento) {
-        StringBuilder relatorio = new StringBuilder();
+    @Autowired
+    public RelatorioService(AbastecimentoRepository abastecimentoRepository) {
+        this.abastecimentoRepository = abastecimentoRepository;
+    }
 
-        relatorio.append("Relatório de Abastecimento\n");
-        relatorio.append("Data: ").append(abastecimento.getData()).append("\n");
-        relatorio.append("Número do Abastecimento: ").append(abastecimento.getNumero()).append("\n");
+    public List<RelatorioAbastecimentodto> gerarRelatorio() {
+        List<RelatorioAbastecimentodto> relatorio = new ArrayList<>();
 
-        Tanque tanque = abastecimento.getTanque();
-        relatorio.append("Tanque: ").append(tanque.getNome()).append("\n");
+        List<Abastecimento> abastecimentos = abastecimentoRepository.findAll();
 
-        Bomba bomba = abastecimento.getBomba();
-        relatorio.append("Bomba: ").append(bomba.getNumero()).append("\n");
+        for (Abastecimento abastecimento : abastecimentos) {
+            RelatorioAbastecimentodto relatorioDTO = new RelatorioAbastecimentodto();
+            relatorioDTO.setDia(abastecimento.getData());
+            relatorioDTO.setTanque(abastecimento.getTanque().getNome());
+            relatorioDTO.setBomba(Integer.toString(abastecimento.getBomba().getNumero()));
+            relatorioDTO.setCombustivel(abastecimento.getCombustivel());
+            relatorioDTO.setValor(abastecimento.getTotalPago());
 
-        relatorio.append("Combustível: ").append(abastecimento.getCombustivel()).append("\n");
-        relatorio.append("Quantidade de Litros: ").append(abastecimento.getQuantidadeLitros()).append("\n");
-        relatorio.append("Valor por Litro: ").append(abastecimento.getValorLitro()).append("\n");
-        relatorio.append("Total Pago: ").append(abastecimento.getTotalPago()).append("\n");
-        relatorio.append("Imposto: ").append(abastecimento.getImposto()).append("\n");
+            relatorio.add(relatorioDTO);
+        }
 
-        return relatorio.toString();
+        return relatorio;
     }
 }

@@ -5,12 +5,15 @@ import { BombaComponent } from './bomba/bomba.component';
 import { TanqueComponent } from './tanque/tanque.component';
 import { LoginComponent } from './login/login.component';
 
+
+
 const routes: Routes = [
-  { path: '', redirectTo: '/abastecimento', pathMatch: 'full' },
-  { path: 'abastecimento', component: AbastecimentoComponent },
+  { path: 'login', component: LoginComponent },
   { path: 'bomba', component: BombaComponent },
+  { path: 'abastecimento', component: AbastecimentoComponent },
   { path: 'tanque', component: TanqueComponent },
-  { path: 'login', component: LoginComponent } 
+
+  { path: '', redirectTo: '/login', pathMatch: 'full' }, 
 ];
 
 @NgModule({

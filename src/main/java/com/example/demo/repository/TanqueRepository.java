@@ -5,5 +5,4 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface TanqueRepository extends JpaRepository<Tanque, Long> {
 
-    // Se necessário, adicione métodos de consulta personalizados aqui
 }

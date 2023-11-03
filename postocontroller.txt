@@ -1,0 +1,95 @@
+
+  
+###Requisitos funcionais:
+
+- Você foi contratado para analisar e desenvolver uma API e uma aplicação web(SPA) para gerenciar os abastecimentos e tanques de combustíveis do posto ABCD. Sabendo disso, leia com atenção as informações que o gerente do posto descreveu:
+- Preciso controlar os abastecimentos feitos durante cada dia, identificando a bomba utilizada, o combustível, a quantidade de litros e o valor abastecido;
+- Em cada abastecimento incide um imposto de 13% do valor abastecido, e essa informação deve ser registrada;
+- Cada bomba está ligada a um tanque. No posto ABC existem dois tanques, um de gasolina e um de óleo diesel. Para cada tanque duas bombas de combustível;
+- Também gostaria de um relatório em que os abastecimentos fossem agrupados, exibindo o dia, o tanque, a bomba, o combustível e o valor. E ao final do relatório a soma total do período.
+- A aplicação deve ter controle de acesso, permitindo somente usuários autorizados;
+   
+###Requisitos não funcionais:
+- A aplicação deve ser simples (Minimum Viable Product);
+- Utilize boas práticas e conhecimentos que você julga interessantes;
+- Caso sinta necessidade crie testes unitários/funcionais;
+- Para o front-end deve ser utilizado o framework Angular 10 ou superior;
+- Para o back-end pode deve ser utilizado o framwork Spring.
+- Para construção do relatório pode ser utilizada qualquer ferramenta ou recurso;
+       
+
+Com base nos trechos de código fornecidos, você já implementou os seguintes endpoints para a entidade Abastecimento:
+
+Listar todos os abastecimentos:
+
+Método: GET
+Endpoint: /abastecimento
+Método no Controller: getAllAbastecimentos()
+Retorno: Lista de objetos Abastecimento
+Obter um abastecimento por ID:
+
+Método: GET
+Endpoint: /abastecimento/{id}
+Método no Controller: getAbastecimentoById(Long id)
+Parâmetro: id (PathVariable)
+Retorno: Objeto Abastecimento com o ID correspondente
+Criar um novo abastecimento:
+
+Método: POST
+Endpoint: /abastecimento
+Método no Controller: createAbastecimento(@RequestBody Abastecimento abastecimento)
+Parâmetro: Objeto Abastecimento no corpo da requisição
+Retorno: Objeto Abastecimento criado
+Atualizar um abastecimento existente por ID:
+
+Método: PUT
+Endpoint: /abastecimento/{id}
+Método no Controller: updateAbastecimento(Long id, @RequestBody Abastecimento abastecimento)
+Parâmetros: id (PathVariable), Objeto Abastecimento no corpo da requisição
+Retorno: Objeto Abastecimento atualizado
+Excluir um abastecimento por ID:
+
+Método: DELETE
+Endpoint: /abastecimento/{id}
+Método no Controller: deleteAbastecimento(Long id)
+Parâmetro: id (PathVariable)
+Retorno: Sem retorno (void)
+Se o aplicativo for usado em diferentes regiões do mundo, considere adicionar suporte à internacionalização para tornar o aplicativo acessível a usuários de diferentes idiomas e regiões.
+Revisão de Segurança:
+
+Realize uma revisão de segurança completa para garantir que o aplicativo esteja protegido contra ataques comuns, como injeção de SQL, Cross-Site Scripting (XSS) e Cross-Site Request Forgery (CSRF).
+Revisão da Arquitetura:
+
+Se possível, reveja a arquitetura do aplicativo para garantir que ela seja escalável, modular e fácil de manter.
+Depois de revisar e abordar esses pontos, você estará pronto para implantar e usar seu aplicativo em um ambiente de produção. Se surgirem problemas específicos durante a revisão ou se você precisar de ajuda com qualquer parte específica do código, por favor, sinta-se à vontade para perguntar!
+
+src
+|-- main
+    |-- java
+        |-- com
+            |-- example
+                |-- demo
+                    |-- controller 
+                       |--AbastecimentoController.java
+                       |--RelatorioController.java
+                    |-- dto
+                       |--RelatorioAbastecimentodto.java
+                       |--SecurityConfig.java
+                    |-- model 
+                        |--Abastecimento.java
+                        |-- Usuario.java
+                        |-- Bomba.java
+                        |-- Tanque.java
+                    |-- repository
+                        |-- UsuarioRepository.java
+                        |-- AbastecimentoRepository.java
+                        |-- Bombarepository.java
+                        |-- TanqueRepository.java
+                    |-- security
+                        |-- SecurityConfig.java
+                        |-- UserDetailsServiceImpl.java
+                    |-- service
+                        |-- RelatorioService.java
+                        |-- AbastecimentoService.java
+
+                    |-- ControledeAbastecimentoApplication.java

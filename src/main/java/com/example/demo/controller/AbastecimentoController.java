@@ -5,7 +5,6 @@ import com.example.demo.service.AbastecimentoService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
 
 @RestController
@@ -28,8 +27,8 @@ public class AbastecimentoController {
         return abastecimentoService.getAbastecimentoById(id);
     }
 
-    @PostMapping
-    public Abastecimento createAbastecimento(@RequestBody Abastecimento abastecimento) {
+    @PostMapping("/novo")
+    public Abastecimento createNewAbastecimento(@RequestBody Abastecimento abastecimento) {
         return abastecimentoService.createAbastecimento(abastecimento);
     }
 

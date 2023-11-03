@@ -23,14 +23,14 @@ public class RelatorioService {
         List<Abastecimento> abastecimentos = abastecimentoRepository.findAll();
 
         for (Abastecimento abastecimento : abastecimentos) {
-            RelatorioAbastecimentodto relatorioDTO = new RelatorioAbastecimentodto();
-            relatorioDTO.setDia(abastecimento.getData());
-            relatorioDTO.setTanque(abastecimento.getTanque().getNome());
-            relatorioDTO.setBomba(Integer.toString(abastecimento.getBomba().getNumero()));
-            relatorioDTO.setCombustivel(abastecimento.getCombustivel());
-            relatorioDTO.setValor(abastecimento.getTotalPago());
+            RelatorioAbastecimentodto relatoriodto = new RelatorioAbastecimentodto();
+            relatoriodto.setDia(abastecimento.getData());
+            relatoriodto.setTanque(abastecimento.getTanque().getNome());
+            relatoriodto.setBomba(Integer.toString(abastecimento.getBomba().getNumero()));
+            relatoriodto.setCombustivel(abastecimento.getCombustivel());
+            relatoriodto.setValor(abastecimento.getTotalPago());
 
-            relatorio.add(relatorioDTO);
+            relatorio.add(relatoriodto);
         }
 
         return relatorio;

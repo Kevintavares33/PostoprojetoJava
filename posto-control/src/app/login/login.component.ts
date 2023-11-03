@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import { AuthService } from '../auth.service';
 
 @Component({
@@ -10,18 +11,23 @@ export class LoginComponent {
   username: string = '';
   password: string = '';
 
-  constructor(private authService: AuthService) {}
-
+  constructor(private authService: AuthService, private router: Router) {}
   onLogin() {
-    this.authService.login(this.username, this.password).subscribe(
-      ({ token, user }) => {
-        console.log('Login bem-sucedido!', token, user);
-        // Lógica adicional após o login bem-sucedido, se necessário.
+    const credentials = {
+      username: this.username,
+      password: this.password
+    };
+  
+    this.authService.login(credentials).subscribe(
+      (response: any) => {
+        const token = response.token;
+     
+        this.router.navigate(['/abastecimento']);
       },
-      error => {
+      (error: any) => {
         console.error('Erro durante o login:', error);
-        // Lógica para lidar com erros aqui.
+        
       }
     );
   }
-}
+}  

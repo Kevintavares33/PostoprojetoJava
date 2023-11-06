@@ -1,16 +1,25 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
-import { environment } from '../environment/environment';
+import { Observable, of } from 'rxjs';
+
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  private apiUrl = environment.apiUrl;
 
-  constructor(private http: HttpClient) { }
+  private loggedIn: boolean = false;
 
-  login(credentials: { username: string, password: string }): Observable<any> {
-    return this.http.post<any>(`${this.apiUrl}/login`, credentials);
+  login(): Observable<boolean> {
+    // Simula um login bem-sucedido
+    this.loggedIn = true;
+    return of(this.loggedIn);
+  }
+
+  isLoggedIn(): boolean {
+    return this.loggedIn;
+  }
+
+  logout(): void {
+    // Simula o logout
+    this.loggedIn = false;
   }
 }

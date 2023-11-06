@@ -2,10 +2,6 @@ package com.example.demo.security;
 
 import com.example.demo.model.Usuario;
 import com.example.demo.repository.UsuarioRepository;
-
-import java.util.ArrayList;
-
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -27,6 +23,10 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         if (usuario == null) {
             throw new UsernameNotFoundException("Usuário não encontrado: " + username);
         }
-        return new User(usuario.getUsername(), usuario.getPassword(), new ArrayList<>());
+        return User.builder()
+                .username(usuario.getUsername())
+                .password(usuario.getPassword())
+                .roles("USER") // Adicione roles/authorities conforme necessário
+                .build();
     }
 }

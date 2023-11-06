@@ -54,9 +54,15 @@ public class AbastecimentoService {
         return abastecimentoRepository.findById(id).orElse(null);
     }
 
+    // Em AbastecimentoService.java
+
     private void validateAbastecimento(Abastecimento abastecimento) {
-        Objects.requireNonNull(abastecimento, "O objeto de abastecimento não pode ser nulo");
-        // Adicione outras validações conforme necessário
+        Objects.requireNonNull(abastecimento.getPosto(), "Posto não pode ser nulo");
+        Objects.requireNonNull(abastecimento.getData(), "Data não pode ser nula");
+        Objects.requireNonNull(abastecimento.getTanque(), "Tanque não pode ser nulo");
+        Objects.requireNonNull(abastecimento.getBomba(), "Bomba não pode ser nula");
+        Objects.requireNonNull(abastecimento.getCombustivel(), "Combustível não pode ser nulo");
+
     }
 
     private void calcularImpostoETotalPago(Abastecimento abastecimento) {

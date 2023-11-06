@@ -13,7 +13,7 @@ const routes: Routes = [
   { path: 'abastecimento', component: AbastecimentoComponent },
   { path: 'tanque', component: TanqueComponent },
 
-  { path: '', redirectTo: '/login', pathMatch: 'full' }, 
+  { path: '', redirectTo: '/abastecimento', pathMatch: 'full' }, 
 ];
 
 @NgModule({
